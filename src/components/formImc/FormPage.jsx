@@ -35,16 +35,16 @@ const FormPage = () => {
 
     const sortImc = () => {
         switch(sortingType){
-            case "asc" :
-                return [...tmp].sort((a,b) => a.id-b.id)            
             case "desc" :
+                return [...tmp].sort((a,b) => a.id-b.id)            
+            case "asc" :
                 return [...tmp].sort((a,b) => b.id-a.id)
             case "imcMax" :
-                return [...tmp].sort((a,b) => (b.poids / (b.taille*b.taille))- (a.poids / (a.taille*a.taille)))
+                return [...tmp].sort((b,a) => (a.poids / (a.taille*a.taille)) - (b.poids / (b.taille*b.taille)))
             case "imcMins" :
-                return [...tmp].sort((a,b) => (a.poids / (a.taille*a.taille))- (b.poids / (b.taille*b.taille)))
+                return [...tmp].sort((a,b) => (a.poids / (a.taille*a.taille)) - (b.poids / (b.taille*b.taille)))
             default :
-                return tmp
+                return [...tmp]
         }
     }
 
