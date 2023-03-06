@@ -36,11 +36,13 @@ const FormPage = () => {
     const sortImc = () => {
         switch(sortingType){
             case "asc" :
-                return [...tmp].sort((a,b) => a.id-b.id)
-                
-                
+                return [...tmp].sort((a,b) => a.id-b.id)            
             case "desc" :
                 return [...tmp].sort((a,b) => b.id-a.id)
+            case "imcMax" :
+                return [...tmp].sort((a,b) => (b.poids / (b.taille*b.taille))- (a.poids / (a.taille*a.taille)))
+            case "imcMins" :
+                return [...tmp].sort((a,b) => (a.poids / (a.taille*a.taille))- (b.poids / (b.taille*b.taille)))
             default :
                 return tmp
         }
@@ -64,6 +66,8 @@ const FormPage = () => {
                 <option value="">Sélectionnez un tri</option>
                 <option value="asc">Date récente</option>
                 <option value="desc">Date ancienne</option>
+                <option value="imcMin">IMC le plus bas</option>
+                <option value="imcMax">IMC le plus elevé</option>
             </select>
             <button className="m-auto btn btn-outline-info w-25" onClick={() => setFormImcMode("Sign Up")}>Ajouter une valeur</button>
             </div>
