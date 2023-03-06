@@ -61,11 +61,13 @@ const authSlice = createSlice({
         state.isLoading = false
         state.user = action.payload
         localStorage.setItem('token',action.payload.localId)
+        
     })
 
     builder.addCase(signIn.rejected, (state,action) => {
         state.isLoading = false
         state.error = action.payload
+        
     })
 
     builder.addCase(signUp.pending, (state) => {
