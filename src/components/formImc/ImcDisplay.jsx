@@ -20,7 +20,7 @@ const ImcDisplay = (props) => {
     }
   return (
     <>
-    <div className="row d-flex justify-content-around align-item-center">
+    <div className="row d-flex justify-content-around  border border-primary rounded p-4 m-3">
         <div className="col-3">
             {`IMC : ${imc}`}
         </div>

@@ -5,15 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "./components/shared/Modal";
 import SignForm from "./components/auth/signForm";
 import { removeUser,signIn,signUp} from "./components/auth/authSlice";
-import { Navigate, NavLink, Outlet} from "react-router-dom";
+import {  NavLink, Outlet, useNavigate} from "react-router-dom";
 
 function App() {
 
   const [signFormMode, setSignFormMode] = useState("");
-  
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const onSigningHandler = async (credentials) => {
     if (signFormMode === "Se connecter") {
       await dispatch(signIn(credentials));
@@ -24,8 +23,10 @@ function App() {
     setSignFormMode("");
   };
 
-    
-
+    const returnToMenu = () => {
+      dispatch(removeUser())
+      navigate('/')
+    }
 
   useEffect(()=> {
     dispatch(removeUser())
@@ -41,20 +42,17 @@ function App() {
           ,document.getElementById("modal-root"))
       }
       <header className="mb-4">
-        <nav
-          className="navbar navbar-expand-lg bg-body-tertiary"
-          data-bs-theme="dark"
-        >
-          <div className="container-fluid">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+          <div className="container">
             <NavLink className="nav-link" to={`/`}>
-              eIMC
+              e - IMC
             </NavLink>
             {user && <NavLink className="nav-link" to={`/formImc`}>Ajouter Info</NavLink>}
             <div className="collapse navbar-collapse" id="eRecipe-navbar">
               {user ? (
                 <button
                   className="ms-auto btn btn-secondary"
-                  onClick={() => dispatch(removeUser())}
+                  onClick={() => returnToMenu()}
                 >
                   Se déconnecter
                 </button>
